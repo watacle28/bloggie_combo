@@ -32,7 +32,7 @@ export const ResetPassword = (props) => {
             }
             setLoading(true)
             try {
-                const response = await Axios.post('http://192.168.1.7:5002/api/public/resetPassword',{resetToken,password: data.password})
+                const response = await Axios.post('http://localhost:5002/api/public/resetPassword',{resetToken,password: data.password})
                 setResult({...result,success: response.data?.msg})
             } catch (err) {
                 setResult({...result,error: err && err.response && err.response.data})

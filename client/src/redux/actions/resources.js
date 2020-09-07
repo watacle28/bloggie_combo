@@ -10,7 +10,7 @@ import {
 } from '../../utils/setAtuthToken';
 
 
-axios.defaults.baseURL = 'http://192.168.1.7:5002/api'
+axios.defaults.baseURL = 'http://localhost:5002/api'
 
 //*****RESOURCE ACTIONS***************************************************************
 export const getAllResources = () => async dispatch => {

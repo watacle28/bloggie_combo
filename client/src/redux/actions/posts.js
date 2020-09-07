@@ -29,7 +29,7 @@ import {
     loadUserData
 } from './auth';
 
-axios.defaults.baseURL = 'http://192.168.1.7:5002/api'
+axios.defaults.baseURL = 'http://localhost:5002/api'
 
 
 export const getAllPosts = (page,limit) => async dispatch => {

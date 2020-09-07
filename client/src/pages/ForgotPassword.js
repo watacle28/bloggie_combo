@@ -107,7 +107,7 @@ export const ForgotPassword = () => {
        }
        
      try {
-        const response = await Axios.post('http://192.168.1.7:5002/api/public/forgotPassword',{email})
+        const response = await Axios.post('http://localhost:5002/api/public/forgotPassword',{email})
         setResult({...result,success: response.data.message})
         setEmail('')
      } catch (err) {
