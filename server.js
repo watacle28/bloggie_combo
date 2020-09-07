@@ -1,5 +1,4 @@
 require('dotenv').config(); 
-require('colors')
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors')
@@ -37,6 +36,6 @@ if(process.env.NODE_ENV === 'production') {
   }
 mongoose.connect(process.env.MONGOURI,{useCreateIndex: true,useNewUrlParser: true,useUnifiedTopology: true})
     .then(()=>{
-        console.log('database connected succesfully'.bgGreen);
-        app.listen(PORT,()=> console.log(`server started at ${PORT} use http://localhost:${PORT} to connect`.bgMagenta))
+        console.log('database connected succesfully');
+        app.listen(PORT,()=> console.log(`server started at ${PORT} use http://localhost:${PORT} to connect`))
     })
