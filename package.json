@@ -4,7 +4,7 @@
   "description": "a blog with authentication build with nodejs and react",
   "main": "server.js",
   "scripts": {
-    "start": "nod server",
+    "start": "node server",
     "client-install": "npm install --prefix client",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
