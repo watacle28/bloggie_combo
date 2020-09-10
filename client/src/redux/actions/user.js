@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { GET_BLOGGERS, GET_SINGLE_BLOGGER, SET_ERRORS } from '../types';
 
-axios.defaults.baseURL = 'http://localhost:5002/api'
+axios.defaults.baseURL = '/api'
 
 export const getAllBloggers = () => async dispatch=>{
     try {

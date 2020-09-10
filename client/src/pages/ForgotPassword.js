@@ -1,11 +1,10 @@
-import React,  { useState } from 'react';
-import styled from 'styled-components';
-import logo from '../Layout/Headr/logo.svg'
-import Helmet from 'react-helmet'
-import { Link } from 'react-router-dom';
-import {IoMdCheckmarkCircleOutline} from 'react-icons/io'
 import Axios from 'axios';
+import React, { useState } from 'react';
+import Helmet from 'react-helmet';
+import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
+import styled from 'styled-components';
 import { Spinner } from '../components/Loader';
+import logo from '../Layout/Headr/logo.svg';
 
 export const StyledContainer = styled.div`
     width: 100%;
@@ -108,7 +107,7 @@ export const ForgotPassword = () => {
        }
        
      try {
-        const response = await Axios.post('http://localhost:5002/api/public/forgotPassword',{email})
+        const response = await Axios.post('/api/public/forgotPassword',{email})
         setResult({...result,success: response.data.message})
         setEmail('')
      } catch (err) {

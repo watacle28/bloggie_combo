@@ -37,7 +37,7 @@ function App() {
     Aos.init({
       duration: 1000
     })
-    axios.defaults.baseURL = 'http://localhost:5002/api'
+    axios.defaults.baseURL = '/api'
     dispatch(loadUserData())
   
   }, [dispatch])

@@ -1,35 +1,57 @@
-import {
-    GET_ALL_POSTS,
-    UNLIKE_POST,
-    GET_SINGLE_POST,
-    POST_NOT_FOUND,
-    PUBLISH_SUCCESS,
-    ADD_COMMENT,
-    LOADING,
-    GET_COMMENTS,
-    EDIT_SUCCESS,
-    REMOVE_POST,
-    LIKE_POST,
-    EDIT_COMMENT,
-    REMOVE_COMMENT,
-    LIKE_COMMENT,
-    UNLIKE_COMMENT,
-    GET_POST_BY_TAG,
-    SET_ERRORS
-} from '../types';
 import axios from 'axios';
 import {
     toast
-} from 'react-toastify'
-
+} from 'react-toastify';
 import {
     setAuthToken
 } from '../../utils/setAtuthToken';
 import {
-    loadUserData
-} from './auth';
+    ADD_COMMENT,
 
-axios.defaults.baseURL = 'http://localhost:5002/api'
+
+
+
+
+    EDIT_COMMENT, EDIT_SUCCESS, GET_ALL_POSTS,
+
+
+
+
+
+
+    GET_COMMENTS,
+
+
+
+
+
+
+
+    GET_POST_BY_TAG, GET_SINGLE_POST,
+
+
+
+
+
+
+
+
+
+
+    LIKE_COMMENT, LIKE_POST, LOADING, POST_NOT_FOUND,
+    PUBLISH_SUCCESS,
+
+
+
+
+
+
+
+    REMOVE_COMMENT, REMOVE_POST, UNLIKE_POST
+} from '../types';
+
+
+axios.defaults.baseURL = '/api'
 
 
 export const getAllPosts = (page,limit) => async dispatch => {

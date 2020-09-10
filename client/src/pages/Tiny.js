@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components'
 import { Editor } from '@tinymce/tinymce-react';
 import Axios from 'axios';
+import React from 'react';
+import styled from 'styled-components';
 const key = process.env.REACT_APP_TINY_CLOUD_KEY;
 
 
@@ -79,7 +79,7 @@ export const Tiny = ({value,handleEditorChange}) => {
          images_upload_handler: async (blobInfo,success,failure)=>{
             let data = new FormData();
             data.append('avatar', blobInfo.blob(),blobInfo.filename())
-            const res = await Axios.post('http://localhost:5002/api/public/upload',data)
+            const res = await Axios.post('/api/public/upload',data)
             console.log({res});
            success(`${res.data}`)
          },

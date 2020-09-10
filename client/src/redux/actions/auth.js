@@ -1,14 +1,14 @@
-import {REGISTER_FAILURE,REGISTER_SUCCESS,LOGIN_SUCCESS,LOGOUT,LOADING, LOGIN_FAILURE,SET_ERRORS, USER_LOADED,ISAUTH, PROFILE_UPDATE_SUCCESS, PROFILE_UPDATE_FAILURE} from '../types';
 import axios from 'axios';
-import {toast} from 'react-toastify'
-import {setAuthToken} from '../../utils/setAtuthToken'
+import { toast } from 'react-toastify';
+import { setAuthToken } from '../../utils/setAtuthToken';
+import { ISAUTH, LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT, PROFILE_UPDATE_FAILURE, PROFILE_UPDATE_SUCCESS, REGISTER_FAILURE, REGISTER_SUCCESS, SET_ERRORS, USER_LOADED } from '../types';
 
  const config = {
         headers : {
             "Content-type": "application/json"
         }
     }
-axios.defaults.baseURL = 'http://localhost:5002/api'
+axios.defaults.baseURL = '/api'
 
     
 

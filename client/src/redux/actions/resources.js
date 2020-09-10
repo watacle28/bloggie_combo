@@ -1,16 +1,13 @@
 import axios from 'axios';
-import { GET_ALL_RESOURCES, ADD_RESOURCE, EDIT_RESOURCE, DELETE_RESOURCE, GET_ALL_CHANNELS, ADD_CHANNEL, GET_ALL_TWITACCS, ADD_TWITACC, EDIT_TWITACC, DELETE_TWITACC, GET_ALL_COURSES, ADD_COURSE, EDIT_COURSE, DELETE_COURSE, SET_ERRORS, UPVOTE_RESOURCE, UPVOTE_CHANNEL, UPVOTE_TWITACC, UPVOTE_COURSE, EDIT_CHANNEL, DELETE_CHANNEL } from '../types';
-
-import {
-    toast
-} from 'react-toastify'
-
 import {
     setAuthToken
 } from '../../utils/setAtuthToken';
+import { ADD_CHANNEL, ADD_COURSE, ADD_RESOURCE, ADD_TWITACC, DELETE_CHANNEL, DELETE_COURSE, DELETE_RESOURCE, DELETE_TWITACC, EDIT_CHANNEL, EDIT_COURSE, EDIT_RESOURCE, EDIT_TWITACC, GET_ALL_CHANNELS, GET_ALL_COURSES, GET_ALL_RESOURCES, GET_ALL_TWITACCS, SET_ERRORS, UPVOTE_CHANNEL, UPVOTE_COURSE, UPVOTE_RESOURCE, UPVOTE_TWITACC } from '../types';
 
 
-axios.defaults.baseURL = 'http://localhost:5002/api'
+
+
+axios.defaults.baseURL = '/api'
 
 //*****RESOURCE ACTIONS***************************************************************
 export const getAllResources = () => async dispatch => {

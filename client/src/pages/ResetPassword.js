@@ -1,12 +1,12 @@
-import React,{useState,useEffect} from 'react';
-import {useHistory,useLocation, Link} from 'react-router-dom'
-import { StyledContainer,Success } from './ForgotPassword'
-import logo from '../Layout/Headr/logo.svg'
 import Axios from 'axios';
-import Helmet from 'react-helmet'
-import { Spinner } from '../components/Loader';
+import React, { useEffect, useState } from 'react';
+import Helmet from 'react-helmet';
 import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
+import { Link, useLocation } from 'react-router-dom';
 import { CustomButton } from '../components/CustomButtom';
+import { Spinner } from '../components/Loader';
+import logo from '../Layout/Headr/logo.svg';
+import { StyledContainer, Success } from './ForgotPassword';
 
 
 export const ResetPassword = (props) => {
@@ -33,7 +33,7 @@ export const ResetPassword = (props) => {
             }
             setLoading(true)
             try {
-                const response = await Axios.post('http://localhost:5002/api/public/resetPassword',{resetToken,password: data.password})
+                const response = await Axios.post('/api/public/resetPassword',{resetToken,password: data.password})
                 setResult({...result,success: response.data?.msg})
             } catch (err) {
                 setResult({...result,error: err && err.response && err.response.data})
