@@ -21,7 +21,7 @@ const public = require('./routes/public')
 const blog = require('./routes/blog')
 const resources = require('./routes/resources')
 //middleware inits
-
+const uri = 'mongodb+srv://watacle:watacle28@wemen-kru3s.mongodb.net/Bloggie?retryWrites=true&w=majority'
 app.use('/api/auth',auth);
 app.use('/api/user',checkAuth,user);
 app.use('/api/public',public);
@@ -34,7 +34,7 @@ if(process.env.NODE_ENV === 'production') {
   
     app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html')));
   }
-mongoose.connect(process.env.MONGODB_URI,{useCreateIndex: true,useNewUrlParser: true,useUnifiedTopology: true})
+mongoose.connect(uri,{useCreateIndex: true,useNewUrlParser: true,useUnifiedTopology: true})
     .then(()=>{
         console.log('database connected succesfully');
         app.listen(PORT,()=> console.log(`server started at ${PORT} use http://localhost:${PORT} to connect`))
