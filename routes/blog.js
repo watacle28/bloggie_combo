@@ -60,9 +60,7 @@ router.put('/edit/:id', async (req, res) => {
             msg: 'sorry you dont own the blog'
         })
     }
-    //user owns post so can edit
- 
-   // try {
+   
         
 
         const postToEdit = await Blog.findById(req.params.id)
