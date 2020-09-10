@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {toast} from 'react-toastify'
-
+import Helmet from 'react-helmet'
 import {StyledForm} from './Login';
 import { register } from '../redux/actions/auth';
 import { Link } from 'react-router-dom';
@@ -36,7 +36,11 @@ const dispatch = useDispatch();
  
     return (
         <StyledForm autoComplete='off' onSubmit={handleSubmit}  noValidate>
-       
+        <Helmet>
+          <title>Register</title>
+          <meta name="description" content="Register page" />
+         
+        </Helmet>
         <h2>Register</h2>
         <label htmlFor="username">Username</label>
         <input autoFocus type="text" id='username' name='username' onChange={handleChange}/> 

@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
+import Helmet from 'react-helmet'
 import oops from './oops.gif'
 
 const StyledDiv = styled.div`
@@ -19,6 +20,11 @@ const StyledDiv = styled.div`
 export const NotFound = ({id, type}) => {
     return (
         <StyledDiv>
+             <Helmet>
+          <title>Not Found</title>
+          <meta name="description" content="Error page" />
+         
+        </Helmet>
           <h3>{type} with id {id} not found</h3>  
           <h5><Link to='/'>Go To Home Page</Link></h5>
         </StyledDiv>

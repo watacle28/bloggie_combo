@@ -11,28 +11,28 @@ import { Resources } from '../components/Resources';
 
 const StyledLayout= styled.div`
 width: 100vw;
-height: min-content;
+height: auto;
 position: relative; 
 display: flex;
- justify-content: center;
-
+justify-content: center;
+padding: 2rem 1rem 1rem 1rem;
  margin: auto;
  margin-top: 10vh;
  margin-bottom: 5vh;
  
 
   .sidebar{
-      position: relative;
+    position: relative;
     display: none;
+    
     @media screen and (min-width: 700px) {
             padding: 2rem 0 ;
             display:flex;
             flex-direction:column;
-            justify-content:center;
+            justify-content:flex-start;
             max-width: 500px;
-            height: min-content;
-            border: 1px solid rgba(255,255,255,0.1);
-            
+            height:min-content;
+          
         }
     }
     .children{
@@ -40,10 +40,13 @@ display: flex;
         position: relative;
         width: 100%;
         min-height: 100vh;
-        border: 1px solid rgba(255,255,255,0.1);
+        border: none;
+       
         @media screen and (min-width: 700px) {
          width: 58%;
          max-width: 700px;
+         border: 1px solid rgba(255,255,255,0.1);
+        justify-content:center;
          display: flex;
          justify-content: center;
             
@@ -56,7 +59,7 @@ display: flex;
 export const Layout = (props) => {
   const isLoggedIn = useSelector(state => state.auth.authenticated)
   const user = useSelector(state => state.auth.userData)
-  console.log({user});
+
     return (
         <StyledLayout>
         <Headr />

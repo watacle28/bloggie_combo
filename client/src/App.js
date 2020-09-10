@@ -1,47 +1,49 @@
-import React ,{useEffect}from 'react';
-import axios from 'axios'
-import {useDispatch,useSelector} from 'react-redux';
-import {BrowserRouter as Router,Switch,Route,Redirect} from 'react-router-dom';
-import {createBrowserHistory} from 'history'
 import Aos from 'aos';
-import 'aos/dist/aos.css'
-//toast notifications provider
-
-//component import
-import{ Home }from './pages/Home';
-import{ Login }from './pages/Login';
-import{ Register} from './pages/Register';
-import {Authors }from './pages/Authors';
-import {Editor} from './pages/Editor';
-import {ForgotPassword} from './pages/ForgotPassword';
-import {ResetPassword} from './pages/ResetPassword'
-
-//custom routes
-import {AuthRoute,PrivateRoute, CanEditRoute, ProfileRoute} from './utils/myRoutes'
-import {Layout} from './Layout/Layout'
-
+import 'aos/dist/aos.css';
+import axios from 'axios';
+import { createBrowserHistory } from 'history';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
-import { SinglePost } from './pages/SinglePost';
-import { Author } from './pages/Author';
-import { loadUserData } from './redux/actions/auth';
+import { Spinner } from './components/Loader';
+import { Layout } from './Layout/Layout';
 import { FourOFour } from './pages/404';
+import { Author } from './pages/Author';
+import { Authors } from './pages/Authors';
+import { Contact } from './pages/Contact';
+import { Editor } from './pages/Editor';
 import { EditProfile } from './pages/EditProfile';
-import {Contact} from './pages/Contact';
+import { ForgotPassword } from './pages/ForgotPassword';
+//component import
+import { Home } from './pages/Home';
+import { Login } from './pages/Login';
+import { Register } from './pages/Register';
+import { ResetPassword } from './pages/ResetPassword';
+import { SinglePost } from './pages/SinglePost';
+import { loadUserData } from './redux/actions/auth';
+//custom routes
+import { AuthRoute, CanEditRoute, PrivateRoute, ProfileRoute } from './utils/myRoutes';
+
+
 
 
 function App() {
   const dispatch = useDispatch()
   const history = createBrowserHistory()
-  const loading = useSelector(state =>state.auth.loading)
+  const loading = useSelector(state => state.auth.loading)
+
   useEffect(() => {
-    Aos.init()
+    Aos.init({
+      duration: 1000
+    })
     axios.defaults.baseURL = 'http://localhost:5002/api'
     dispatch(loadUserData())
   
   }, [dispatch])
   return ( <Router history={history}>
   
-  {!loading && ( <Layout>
+  {loading  ? <Spinner/>  : ( <Layout>
     
         
         <Switch>

@@ -74,7 +74,7 @@ export const  loadUserData = () => async dispatch =>{
         try {
             setAuthToken(token)
             const userData = await axios.get('/user/me');
-            
+          
             dispatch({type: ISAUTH})
             dispatch({
                 type: USER_LOADED,

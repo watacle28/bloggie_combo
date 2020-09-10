@@ -3,6 +3,7 @@ import {useHistory,useLocation, Link} from 'react-router-dom'
 import { StyledContainer,Success } from './ForgotPassword'
 import logo from '../Layout/Headr/logo.svg'
 import Axios from 'axios';
+import Helmet from 'react-helmet'
 import { Spinner } from '../components/Loader';
 import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
 import { CustomButton } from '../components/CustomButtom';
@@ -49,6 +50,11 @@ export const ResetPassword = (props) => {
         }, [resetToken])
         return (
             <StyledContainer>
+                 <Helmet>
+          <title>Reset Password</title>
+          <meta name="description" content="reset password" />
+         
+        </Helmet>
             <form onSubmit={resetPassword} autoComplete='off'>
             <div><img src={logo} alt='Dev Blogger'/></div>
             {result && result.success ? 

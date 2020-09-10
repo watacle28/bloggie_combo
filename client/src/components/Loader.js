@@ -1,6 +1,5 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components';
-import watchSpinner from '../assets/loder.gif'
 
 const Container = styled.div`
     width: 5rem;
@@ -106,7 +105,7 @@ const Container = styled.div`
 export const Spinner = () =>{
     return (
     <Container>
-    <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
     </Container> 
     )      
 }

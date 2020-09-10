@@ -25,7 +25,7 @@ display: flex;
 align-items: center;
 flex-direction: column;
 max-width: 500px;
-
+margin: auto;
 @media screen and (min-width: 700px){
     margin:0 auto;
     max-width: 700px;

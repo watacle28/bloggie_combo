@@ -1,6 +1,7 @@
 import React,{useEffect} from 'react'
 import { FaFacebook,FaRegHeart, FaTwitter, FaInstagram, FaLinkedin,  FaPencilAlt,  FaRegComments, FaMapMarkerAlt, FaCalendarAlt, FaLinkedinIn } from 'react-icons/fa'
 import styled from 'styled-components';
+import Helmet from 'react-helmet'
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime'
 import Avatar from 'react-avatar';
@@ -78,6 +79,7 @@ const Date = styled(motion.div)`
        height: 100%;
        padding: 1rem;
        text-transform: uppercase;
+       border-radius: 5px;
 
     `
 
@@ -88,6 +90,11 @@ const PostInfo = styled.div`
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    .hvr{
+        text-transform: capitalize;
+        font-weight: bold;
+        color: #222;
+    }
     .post_data{
         width: 100%;
         display: flex;
@@ -109,7 +116,16 @@ const Profile = styled.div`
      display: flex;
      flex-direction: column;
      align-items: flex-start;
-     
+     .coa-edit{
+          span{
+            font-size: .7rem;
+            text-transform: lowercase;
+            color: #222;
+           }
+         @media screen and (max-width: 500px){
+            font-size: .7rem;
+         }
+     }
      .header{
          width: 100%;
          display: flex;
@@ -124,6 +140,7 @@ const Profile = styled.div`
              color: rgba(255,255,255,.2);
          }
      }
+
      .loc_joined{
          display: flex;
          width: 100%;
@@ -153,7 +170,7 @@ const Profile = styled.div`
 export const Author = (props) => {
     const currentBlogger = useSelector(state => state.bloggers && state.bloggers.currentBlogger)
     const loggedInBlogger = useSelector(state => state.auth && state.auth.userData && state.auth.userData._id)
-    const social = {}
+  
     const dispatch = useDispatch()
     const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"]
     const links = [
@@ -170,6 +187,11 @@ export const Author = (props) => {
     }, [dispatch,props.match.params.id])
     return (
       <Container>
+           <Helmet>
+    <title>{currentBlogger?.username}</title>
+          <meta name="description" content='I write posts and share resources here' />
+         
+        </Helmet>
       {currentBlogger &&  
       
         <div>
@@ -188,7 +210,7 @@ export const Author = (props) => {
                  {currentBlogger.role && <span>{currentBlogger.role}</span>}
                  <div className="loc_joined">
                  {currentBlogger.location && <div><FaMapMarkerAlt/> <span>{currentBlogger.location}</span></div>}
-                 <div><FaCalendarAlt/><span>{currentBlogger.joined ? currentBlogger.joined : `Joined 28 June 1989`}</span></div>
+                
                  </div>
                  <div className="posts">
                
@@ -224,7 +246,7 @@ export const Author = (props) => {
                             <span data-count = {post.likes.length}> <FaRegHeart/></span> 
                         </div>
                        
-                        <Link to={`/post/${post._id}`}>READ MORE...</Link> 
+                        <Link to={`/post/${post._id}`}>Go to post...</Link> 
      
                     </PostInfo>
                    

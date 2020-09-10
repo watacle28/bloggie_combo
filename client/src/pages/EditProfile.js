@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {motion} from 'framer-motion';
+import Helmet from 'react-helmet'
 import {useDispatch, useSelector} from 'react-redux'
 import { ImageUpload } from '../components/ImageUpload';
 import { CustomButton } from '../components/CustomButtom';
@@ -8,13 +9,16 @@ import { Location } from '../components/Location';
 import { updateProfile } from '../redux/actions/auth';
 
     const ProfileContainer = styled(motion.div)`
-        width: 100vw;
+        width: 100%;
         min-height: 100vh;
         margin-top: 5rem;
         display: flex;
         flex-direction: column;
         justify-content:center;
         align-items: center;
+        @media screen and (min-width: 700px){
+            margin-top: 2rem;
+        }
         h2 {
             color: white;
             font-weight: 900;
@@ -109,7 +113,7 @@ import { updateProfile } from '../redux/actions/auth';
         //save user updated profile
         const handleSubmit = (e) =>{
             e.preventDefault();
-           console.log({...links})
+           
             let social = {...links}
             let fullname = `${data.first_name} ${data.surname}`
              let formData = new FormData()
@@ -122,7 +126,7 @@ import { updateProfile } from '../redux/actions/auth';
              formData.append('fullname', fullname)
              formData.append('email', data.email)
              formData.append('role', data.role)
-             formData.append('location', country)
+             formData.append('location', data.location)
              formData.append('bio', data.bio)
              dispatch(updateProfile(formData,history,userData._id))
         }
@@ -132,16 +136,21 @@ import { updateProfile } from '../redux/actions/auth';
             if(userData){
                 const {socialLinks,email,avatar,fullname,bio,role,location} = userData
                 setData({...data,email,first_name: fullname && fullname.split(' ')[0],
-                 surname: fullname && fullname.split(' ')[1], role, bio})
+                 surname: fullname && fullname.split(' ')[1], role, bio,location})
                  setLinks({...links,...socialLinks})
                 setImage({...image, preview: avatar})
-                 setCountry(location)
+                //  setCountry(location)
                 
             }
            
         }, [])
         return (
             <ProfileContainer>
+                 <Helmet>
+        <title>Edit your profile</title>
+          <meta name="description" content="Profile edit page" />
+         
+        </Helmet>
                 <h2>Update Profile </h2>
                
                 <ProfileForm autoComplete='off' onSubmit={handleSubmit}>
@@ -159,16 +168,19 @@ import { updateProfile } from '../redux/actions/auth';
                     <label htmlFor="surname">Surname</label>
                     <input  type="text" id='surname' name='surname' value ={data.surname} onChange={handleChange}/>
                     </CustomInput>
-                   <CustomInput>
+                   {/* <CustomInput>
                    <label htmlFor="email">Email</label>
                     <input  type="email" id='email' name='email' value = {data.email} onChange={handleChange}/>
-                   </CustomInput>
+                   </CustomInput> */}
                    <CustomInput>
                    <label htmlFor="role">Job Title</label>
                     <input  type="text" id='role' name='role' value={data.role} onChange={handleChange}/>
                    </CustomInput>
-                   
-                    <Location value={country} handleLoc={handleLoc}/>
+                   <CustomInput>
+                   <label htmlFor="location">Location</label>
+                   <input  type="text" id='location' name='location' value={data.location} onChange={handleChange}/>
+                   </CustomInput>
+                    {/* <Location value={country} handleLoc={handleLoc}/> */}
                     <CustomInput>
                     <label htmlFor="email">Bio</label>
                     <textarea placeholder='Say something about yourself...' rows='5' cols='20' id='bio' name='bio' value={data.bio} onChange={handleChange}/>

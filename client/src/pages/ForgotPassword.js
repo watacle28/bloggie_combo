@@ -1,6 +1,7 @@
 import React,  { useState } from 'react';
 import styled from 'styled-components';
 import logo from '../Layout/Headr/logo.svg'
+import Helmet from 'react-helmet'
 import { Link } from 'react-router-dom';
 import {IoMdCheckmarkCircleOutline} from 'react-icons/io'
 import Axios from 'axios';
@@ -119,7 +120,11 @@ export const ForgotPassword = () => {
    
     return (
         <StyledContainer>
-        
+         <Helmet>
+          <title>Forgot Password?</title>
+          <meta name="description" content="Forgot password page" />
+         
+        </Helmet>
        <form onSubmit={sendLink} noValidate autoComplete='off'>
            <Logo><img src={logo} alt='Dev Blogger'/></Logo>
        {result && result.success ? 

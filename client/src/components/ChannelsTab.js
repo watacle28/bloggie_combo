@@ -1,14 +1,14 @@
-import React,{useState,useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux'
+import React, { useEffect } from 'react';
+import { FaPlusCircle } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import { useComp } from '../customHooks';
+import { addChannel, deleteChannel, editChannel, getAllChannels } from '../redux/actions/resources';
+import { AuthComponent } from './AuthComponent';
+import { Channel } from './Channel';
+import { CustomButton } from './CustomButtom';
+import { Spinner } from './Loader';
 import { Modal } from './modal';
 import { Form, StyledResourceForm } from './ResourceForm';
-import { FaPlusCircle } from 'react-icons/fa';
-import { CustomButton } from './CustomButtom';
-import { useComp } from '../customHooks';
-import { addChannel, editChannel, getAllChannels, deleteChannel } from '../redux/actions/resources';
-import { Spinner } from './Loader';
-import {Channel} from './Channel'
-import { AuthComponent } from './AuthComponent';
 
 export const ChannelsTab = ({clicks,setClicks}) => {
     const channels = useSelector(state => state.channels)

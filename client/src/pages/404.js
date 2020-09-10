@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
+import Helmet from 'react-helmet'
 import { CustomButton } from '../components/CustomButtom';
 
 
@@ -27,6 +28,11 @@ const StyledDiv = styled.div`
 export const FourOFour = () => {
     return (
         <StyledDiv>
+             <Helmet>
+          <title>404</title>
+          <meta name="description" content="Error page" />
+         
+        </Helmet>
             <h1>404</h1>
             <p>Sorry it seems you reached the end of internet</p>
             <Link to='/'><CustomButton>Go back to safety</CustomButton></Link>

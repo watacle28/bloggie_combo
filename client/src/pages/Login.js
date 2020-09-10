@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import {useDispatch,useSelector} from 'react-redux'
+import Helmet from 'react-helmet'
 import styled from 'styled-components';
 import { login } from '../redux/actions/auth';
 import { Link } from 'react-router-dom';
@@ -13,14 +14,12 @@ export const StyledForm = styled.form`
  align-items: center;
  justify-content: center;
 
-  /* top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%); */
+
   @media screen and (min-width: 700px){
       width: 100%;
       margin: auto;
       position: absolute;
-      top: 30%;
+      top: 2rem;
   }
  
   h2{
@@ -95,6 +94,11 @@ export const Login = (props) => {
     return (
     
             <StyledForm autoComplete='off' onSubmit={handleSubmit} noValidate >
+                 <Helmet>
+          <title>Login</title>
+          <meta name="description" content="Login page" />
+         
+        </Helmet>
                 <h2>Login</h2>
                 <label htmlFor="email">Email</label>
                 <input autoFocus type="email" id='email' name='email' placeholder='email ' value={loginData.email} onChange={handleChange}/>

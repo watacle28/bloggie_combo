@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
+import Helmet from 'react-helmet';
+import { FaFacebook, FaInstagram, FaLinkedinIn, FaMapMarkerAlt, FaTwitter } from 'react-icons/fa';
 import styled from 'styled-components';
-import pic from './bloggie_contact.jpg'
-import { FaLocationArrow, FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaMapPin, FaMapMarker, FaMapMarkerAlt, FaLinkedinIn } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
 import { CustomButton } from '../components/CustomButtom';
-import Axios from 'axios';
+import pic from './bloggie_contact.jpg';
 
 const StyledContainer = styled.div`
     width: 100%;
@@ -108,7 +107,32 @@ const StyledContainer = styled.div`
     `
 
 export const Contact = () => {
-    const [data, setData] = useState({name:'',email:'',message:''})
+    const submitForm =  (ev)=> {
+        ev.preventDefault();
+        setLoading(true)
+        const form = ev.target;
+        const data = new FormData(form);
+        const xhr = new XMLHttpRequest();
+        xhr.open(form.method, form.action);
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState !== XMLHttpRequest.DONE) return;
+          if (xhr.status === 200) {
+            setLoading(false)
+            form.reset();
+            setStatus("SUCCESS");
+            
+          } else {
+            setLoading(false)
+            setStatus("ERROR")
+
+          }
+        };
+        xhr.send(data);
+      }
+  
+    const [status, setStatus] = useState("")
+    const [loading, setLoading] = useState(false)
     const Socio = [
         {icon: <FaFacebook/>, link: 'https://facebook.com/cwangayi'},
         {icon: <FaTwitter/>, link: 'https://twitter.com/watacle28'},
@@ -116,26 +140,24 @@ export const Contact = () => {
         {icon: <FaLinkedinIn/>, link: 'https://linkedin.com/sirwatacle'}
     ]
 
-    const handleDataInput = (e)=>{
-        const {name,value} = e.target
-        setData({...data, [name]: value})
-    }
+   
 
-    const submitForm = async(e)=>{
-        e.preventDefault();
-    
-        // await Axios.post("https://formspree.io/mbjzpwlp",data)
-     
-    }
+  
 
     return (
         <StyledContainer>
-
+             <Helmet>
+          <title>Contact</title>
+          <meta name="description" content="Contact Page" />
+         
+        </Helmet>
+<h4>About Me</h4>
            <div className="profile">
              <div className="image">
                  <img src={pic} alt="Cleo Wangayi"/>
              </div>
              <div className="info">
+                 
                  <p>Hi, My name is <span>Cleopas Tawanda Wangayi</span> and I am a self taught Javascript fullstack web developer</p>
                  <div className="loc">
                      <FaMapMarkerAlt/> <span>Cape Town, South Africa</span>
@@ -151,14 +173,16 @@ export const Contact = () => {
            </div>
            <h4>Send me a message</h4>
          
-               <form  onSubmit={submitForm}  autoComplete='off' className="contact-form">
+               <form  onSubmit = {submitForm} action = 'https://formspree.io/mbjzpwlp' method = 'POST' autoComplete= 'off' className="contact-form">
                     <label htmlFor="name">
-                    <input type="text" value={data.name} onChange={handleDataInput} id="name" name="name" placeholder='Your Name' /> </label>
+                    <input type="text"  id="name" name="name" placeholder='Your Name' /> </label>
                     <label htmlFor="email">
-                    <input type="email" value={data.email} onChange={handleDataInput} name="email" id="email" placeholder='email address'/></label>
-                    <textarea value={data.message} onChange={handleDataInput} name="message" cols="30" rows="10" placeholder='Your message here'></textarea>
-                    <CustomButton>Send Message</CustomButton>
-
+                    <input type="email"   name="email" id="email" placeholder='email address'/></label>
+                    <textarea  name="message" cols="30" rows="10" placeholder='Your message here'></textarea>
+                    
+                             
+    {status === "SUCCESS" ? <p>Message submitted.We will be in touch. Thank You!</p> :<CustomButton disabled={loading} >{loading ? 'Submitting' : 'Submit'}</CustomButton>}
+              {status === "ERROR" && <p>Ooops! There was an error.</p>}
                </form>
         
         </StyledContainer>

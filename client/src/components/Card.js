@@ -204,7 +204,7 @@ export const Card = (props)=>{
        
         <motion.div variants={grandChildren} className='post_meta'>
       <Link to={`/post/${props.post._id}`}><CustomButton variants={childrenVariants} secondary>Read more</CustomButton></Link>
-     {userId === postAuthor ? <>
+     {userId == postAuthor ? <>
       <div className="post_actions">
        <Link to={`/edit/${props.post._id}`}><FaEdit/></Link>
         <Link to='#' onClick={()=>dispatch(deletePost(props.post._id,history))}><FaTrash/></Link>

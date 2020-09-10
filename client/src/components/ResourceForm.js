@@ -1,15 +1,14 @@
-import React,{useState,useEffect} from 'react';
+import React, { useEffect } from 'react';
+import { FaPlusCircle } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import {useDispatch, useSelector} from 'react-redux'
-import { addResource, getAllResources, deleteResource, editResource } from '../redux/actions/resources';
-import { Link } from 'react-router-dom';
-import { FaRegTrashAlt, FaRegEdit, FaPlusCircle } from 'react-icons/fa';
-import {CustomButton} from './CustomButtom'
+import { useComp } from '../customHooks';
+import { addResource, deleteResource, editResource, getAllResources } from '../redux/actions/resources';
+import { AuthComponent } from './AuthComponent';
+import { CustomButton } from './CustomButtom';
+import { Spinner } from './Loader';
 import { Modal } from './modal';
 import { Resource } from './Resource';
-import { Spinner } from './Loader';
-import { useComp } from '../customHooks';
-import { AuthComponent } from './AuthComponent';
 export const StyledResourceForm = styled.div`
     width:100%;
     transition: all 1s ease;
@@ -139,7 +138,7 @@ export const ResourceForm = ({clicks, setClicks}) => {
             <Form  autoComplete = 'off'  onSubmit={editMode.state === true ? saveChanges : add}>
               <h5>Enter Resource Details</h5>
             <label htmlFor="name">Name </label>
-            <input autoFocus='true' type="text" name="name" id="name" value={values.name || ''} onChange={handleChange} placeholder='name of resource'/>
+            <input autoFocus={true} type="text" name="name" id="name" value={values.name || ''} onChange={handleChange} placeholder='name of resource'/>
            <label htmlFor="link">Link </label>
            <input type="url" name="link" id="link" value={values.link || ''} onChange={handleChange} placeholder='link to resource' />
             <h6>Select a type for your resource </h6>

@@ -1,24 +1,22 @@
-import React ,{useEffect, useState, useRef} from 'react';
-import 'prismjs/themes/prism-okaidia.css'
-
-import Prism from 'prismjs'
-import Avatar from 'react-avatar';
-import {useSelector,useDispatch} from 'react-redux';
-import {Link} from 'react-router-dom';
-import styled, { createGlobalStyle } from 'styled-components';
-
-import { getSinglePost, addComment, likePost, unlikePost, editComment, removeComment, likeComment } from '../redux/actions/posts';
-
-import { smartRedirect } from '../redux/actions/ui';
-import { Comment } from '../components/comment';
-import {Spinner} from '../components/Loader'
-import { FaHeart, FaRegHeart } from 'react-icons/fa';
-import { LOADING } from '../redux/types';
-import { NotFound } from './NotFound';
+import Prism from 'prismjs';
+import 'prismjs/themes/prism-okaidia.css';
+import React, { useEffect, useRef, useState } from 'react';
+import Helmet from 'react-helmet';
+import { FaRegHeart } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { CustomButton } from '../components/CustomButtom';
-import { Tiny } from './Tiny';
+import styled from 'styled-components';
 import { Tags } from '../components/Card';
+import { Comment } from '../components/comment';
+import { CustomButton } from '../components/CustomButtom';
+import { Spinner } from '../components/Loader';
+import { editComment, getSinglePost, likeComment, likePost, removeComment, unlikePost } from '../redux/actions/posts';
+import { smartRedirect } from '../redux/actions/ui';
+import { NotFound } from './NotFound';
+import { Tiny } from './Tiny';
+
+
 
 
 const StyledPost = styled.div`
@@ -36,9 +34,10 @@ const StyledPost = styled.div`
     border: 1px 0 solid rgba(255,255,255,.5);
      overflow-x: hidden;
     padding: .5rem;
+
     @media screen and (min-width: 700px){
        
-        margin-top: auto;
+        margin-top: 2rem;
 
     }
     button:not([class='tox-tbtn']){
@@ -48,12 +47,13 @@ const StyledPost = styled.div`
             margin: auto .5rem;
             transition: all .5s ease-in;
             padding: .2rem .4rem;
+            border-radius: 5px;
            &:hover{
             background: #222;
            }
           
         }
-      
+       
     svg:not([width='24']){
         width: 1rem;
         height: 1rem;
@@ -87,6 +87,7 @@ const StyledPost = styled.div`
         .comments{
             width: 100%;
             height: min-content;
+           
         }
     }
     img{
@@ -149,6 +150,13 @@ const StyledPost = styled.div`
         margin-top: 2rem;
        
     }
+    #add_comment{
+        background-color: #e24727;
+          margin: 1.5rem auto;
+          &:hover{
+              opacity: .6;
+          }    
+            } 
 
 `
 
@@ -164,6 +172,7 @@ export const SinglePost = (props) => {
    
    const id = props.match.params.id
    const node = useRef()
+   const [addComment, setAddComment] = useState(false)
     const post = useSelector(state=> state.posts.currentPost)
     const postOne = useSelector(state=>state.comments)
     const isLoggedIn = useSelector(state => state.auth.authenticated)
@@ -244,10 +253,15 @@ export const SinglePost = (props) => {
    }
     return (
        <>
+     
     
        {loadingPosts   ? <Spinner className ='loading'/> : post ?
         (<StyledPost>
-     
+            <Helmet>
+            <title>{post.title}</title>
+            <meta name="description" content={post.body} />
+         
+            </Helmet>
         <div className="post_content">
         <h4>{post.title}</h4>
         <div className="meta">
@@ -277,16 +291,16 @@ export const SinglePost = (props) => {
                 handleDeleteComment = {()=>handleDeleteComment(comment._id)}/>
             ))}
         </div>
-
-         {  isLoggedIn ?  <div className="commenting">
-        
+            {isLoggedIn && <button id ='add_comment' onClick={()=>setAddComment(!addComment)}>{addComment ? 'Cancel' : 'Add Comment'}</button>}
+         {  addComment && isLoggedIn &&  <div className="commenting">
+           
          <Tiny value={comment.html} handleEditorChange={handleComment}/>
-                {isEditing.status ?  <CustomButton secondary disabled={comment.text === '' ? true : false} onClick={handleEditComment}>Save</CustomButton> :
-                <CustomButton secondary disabled={comment.html === '' ? true : false} onClick={sendComment}>Add Comment</CustomButton>}
-         </div>: 
+            {isEditing.status ?  <CustomButton secondary disabled={comment.text === '' ? true : false} onClick={handleEditComment}>Save</CustomButton> :
+            <CustomButton secondary disabled={comment.html === '' ? true : false} onClick={sendComment}>Add Comment</CustomButton>}
+         </div> }
 
 
-        <div className='unauth'>
+        {!isLoggedIn && <div className='unauth'>
         <Link to='/login'><button secondary onClick={handleRedirect}>Log In </button></Link>  or  {' '}
          <Link to='/register'><button secondary onClick={handleRedirect}>Register </button></Link> 
            {' '} to comment

@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import styled from 'styled-components';
 import Avatar from 'react-avatar';
 import { getAllBloggers } from '../redux/actions/user';
-
+import Helmet from 'react-helmet'
 
 
 const Container = styled.div`
@@ -94,12 +94,16 @@ export const Authors = ({match}) => {
 
     return (
         <Container>
-            
+             <Helmet>
+    <title>Authors</title>
+          <meta name="description" content="our authors" />
+         
+        </Helmet>
         <StyledHeading>Authors</StyledHeading>
        {!loadingBloggers && authors.map(author => ( 
             
            
-               <StyledAuthors data-aos ='flip-right'>
+               <StyledAuthors data-aos ='slide-left'>
          <Link to={`/author/${author._id}`}> 
          <Avatar src={author.avatar} name ={author.username}textSizeRatio={2} size={100}  round={true}/>
            

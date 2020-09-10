@@ -1,23 +1,22 @@
-import React, {useEffect} from 'react';
-import {useDispatch} from 'react-redux'
-import {motion} from 'framer-motion'
-import styled from 'styled-components';
-import Avatar from 'react-avatar'
-import pic from './clo.jpg'
-import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram, FaSignOutAlt, FaLinkedinIn } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import React, { useEffect } from 'react';
+import Avatar from 'react-avatar';
+import { FaFacebook, FaInstagram, FaLinkedinIn, FaSignOutAlt, FaTwitter } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { CustomButton } from './CustomButtom';
+import styled from 'styled-components';
 import { logout } from '../redux/actions/auth';
 import { getSingleBlogger } from '../redux/actions/user';
+import { CustomButton } from './CustomButtom';
 
 
 
 const StyledSideBar = styled(motion.section)`
-   
+        height:auto;
      width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
      padding: 0 1rem;
     
@@ -79,12 +78,13 @@ const dispatch = useDispatch()
     return (
         <StyledSideBar>
           <UserInfo>
-            <Avatar className='avatar' size='100' round src={user && user.avatar} name={user && user.email}/>
+          <Link to={`/author/${user._id}`}><Avatar className='avatar' size='100' round src={user && user.avatar} name={user && user.email}/></Link>
+           
             <div className='links'>
-            <h6>{user && user.fullname}</h6>
+           <Link to={`/author/${user._id}`}> <h6>{user && user.fullname}</h6></Link>
             <p>{user && user.role}</p>
                 <ul>
-    {links.map((link,i)=> (<a href={`${link.href}/cwangayi`} target='_blank' noreferer>{link.icon}</a>))}
+    {links.map((link,i)=> (<a key={i} href={`${link.href}/cwangayi`} target='_blank' rel="noopener noreferrer">{link.icon}</a>))}
                 </ul>
     <div> <span>{user && user.posts.length}</span>{user&& user.posts.length === 1 ? 'Post' : 'Posts'}</div>
             </div>
@@ -92,7 +92,7 @@ const dispatch = useDispatch()
          
         <CustomButton><Link to='/editor'>Add new Post</Link></CustomButton>
         <div>
-           <Link onClick={()=>dispatch(logout())}> <FaSignOutAlt/>Sign Out</Link>
+           <Link to='#' onClick={()=>dispatch(logout())}> <FaSignOutAlt/>Sign Out</Link>
         </div>
         </StyledSideBar>
     )

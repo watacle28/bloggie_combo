@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {useSelector,useDispatch}  from 'react-redux';
 import styled from 'styled-components';
 import bg from './dark_type.jpg'
 import { CustomButton } from './CustomButtom';
@@ -55,12 +55,15 @@ button{
 
 `
 const Hero = () => {
+    const isLoggedIn = useSelector(state => state.auth?.authenticated)
+    const username = useSelector(state => state.auth.userData?.username)
     return (
    <Jumbo>
    <Title>
-    <h1> Web_dev?</h1>
-   <CustomButton><Link to ='/register'>Join</Link></CustomButton> 
-  <p>blogging space for web developers</p> 
+    <h1> Web_dev?</h1> 
+    <p>blogging space for web developers</p>
+  {!isLoggedIn ?  <CustomButton><Link to ='/register'>Join</Link></CustomButton> : <small>Welcome Back, {username} </small>}
+  
   </Title>
    </Jumbo>
     )

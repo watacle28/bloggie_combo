@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react';
 import {useDispatch,useSelector} from 'react-redux';
+import Helmet from 'react-helmet'
 import { createPost, getSinglePost, editPost } from '../redux/actions/posts';
-import { CustomButton } from '../components/CustomButtom';
 import { Tiny } from './Tiny';
 import { StyledContainer } from './ForgotPassword';
 import { Header } from '../components/StyledComponents/Header';
@@ -14,8 +14,7 @@ export const Editor = (props) => {
 
    
     const dispatch = useDispatch();
-     const [image, setImage] = useState({preview: '', raw: ''})
-  
+    
     const [data, setData] = useState({title : '', tags:''})
     const [tinyData, setTinyData] = useState('get typing')
 
@@ -25,15 +24,7 @@ export const Editor = (props) => {
     const handleEditorChange = (value) =>{
       setTinyData(value)
     }
-    // const handleImage = (e) => {
-     
-    //      setImage({...image,
-    //     preview: URL.createObjectURL(e.target.files[0]),
-    //     raw: e.target.files[0]
-    //   })
-    //   console.log({preview: image.preview});
-       
-    // }
+    
     
     const handleDataChange = (e)=>{
       setData({
@@ -93,6 +84,11 @@ export const Editor = (props) => {
     return (
        
        <StyledContainer>
+          <Helmet>
+          <title>New Post</title>
+          <meta name="description" content="Create or edit Post" />
+         
+        </Helmet>
         <form autoComplete='off' onSubmit={handlePublish}>
         
           <Header><span>Add</span> a post</Header>

@@ -1,12 +1,12 @@
 import axios from 'axios';
-import { GET_BLOGGERS, SET_ERRORS, GET_SINGLE_BLOGGER } from '../types';
+import { GET_BLOGGERS, GET_SINGLE_BLOGGER, SET_ERRORS } from '../types';
 
 axios.defaults.baseURL = 'http://localhost:5002/api'
 
 export const getAllBloggers = () => async dispatch=>{
     try {
         const res = await axios.get('/public/bloggers')
-        console.log({res});
+        
         dispatch({type: GET_BLOGGERS, payload: res.data.users})
 
 
