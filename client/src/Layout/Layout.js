@@ -39,6 +39,7 @@ display: flex;
         padding: 2rem 0 ;
         position: relative;
         width: 100%;
+        min-height: 100vh;
         border: 1px solid rgba(255,255,255,0.1);
         @media screen and (min-width: 700px) {
          width: 58%;

@@ -34,7 +34,7 @@ if(process.env.NODE_ENV === 'production') {
   
     app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html')));
   }
-mongoose.connect(process.env.MONGOURI,{useCreateIndex: true,useNewUrlParser: true,useUnifiedTopology: true})
+mongoose.connect(process.env.MONGODB_URI,{useCreateIndex: true,useNewUrlParser: true,useUnifiedTopology: true})
     .then(()=>{
         console.log('database connected succesfully');
         app.listen(PORT,()=> console.log(`server started at ${PORT} use http://localhost:${PORT} to connect`))

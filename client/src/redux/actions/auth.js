@@ -78,13 +78,13 @@ export const  loadUserData = () => async dispatch =>{
             dispatch({type: ISAUTH})
             dispatch({
                 type: USER_LOADED,
-                payload: userData.data.user
+                payload: userData.data?.user
         })
             
         } catch (error) {
             dispatch({
                 type: SET_ERRORS,
-                payload: error.response.data
+                payload: error
             })
         }
     }
